@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:16-alpine
+    ports:
+      - 5232:5432
+    environment:
+      POSTGRES_PASSWORD: lender
+      POSTGRES_USER: lender
+      POSTGRES_DB: lender_test_db
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data

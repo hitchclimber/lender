@@ -9,6 +9,7 @@ This is a simple REST API that allows users to lend and borrow media in their re
 - [ ] Add localisation
 - [ ] Add authentication
 - [ ] Data privacy?!
+  - reduce query results (no '*')
 - [ ] Idea: create a helper that lets you easily digitalise your library (e.g. by scanning ISBN)
 
 

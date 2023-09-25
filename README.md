@@ -7,12 +7,11 @@ This is a simple REST API that allows users to lend and borrow media in their re
 - [x] Add basic CRUD operations for users
 - [ ] Add basic CRUD operations for media
 - [ ] Add localisation
+     &rarr; tried extensively but the necessary crates don't yet offer enough support to make this convenient (I don't want to hack around packing everything into strings)
 - [ ] Add authentication
 - [ ] Data privacy?!
-  - reduce query results (no '*')
+  - reduce query results (no '\*')
 - [ ] Idea: create a helper that lets you easily digitalise your library (e.g. by scanning ISBN)
-
-
 
 
 ## Installation

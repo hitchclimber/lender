@@ -1,4 +1,3 @@
 /target
 /dbdata
 .env
-/migrations

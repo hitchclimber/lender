@@ -10,43 +10,39 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  services:
-    postgres: 
-      image: postgis/postgis
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: password
-        POSTGRES_DB: lender_gha
-        DATABASE_URL: postgres://$POSTGRES_USER:POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB
-      ports: 5432:5432
-        # Set health checks to wait until postgres has started
-      options: >-
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
-
-  steps:
-    - uses: actions/checkout@v3
-    - uses: actions-rs/toolchain@v1
-    with:
-      profile: minimal
-      toolchain: stable
-      override: true
-    - name: Migrate
-      run: |
-        cargo install sqlx-cli --no-default-features --features postgres
-        sqlx database create --database-url $DATABASE_URL
-        sqlx migrate run
-
-        
-
   build:
 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+       image: postgis/postgis
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: lender_gha
+          DATABASE_URL: postgres://$POSTGRES_USER:POSTGRES_PASSWORD@localhost:5432/$POSTGRES_DB
+        ports: 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v3
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+    - name: Install sqlx-cli
+      run: cargo install sqlx-cli --no-default-features --features postgres
+    - name: Run migrations
+      run: |
+        sqlx database create --database-url $DATABASE_URL
+        sqlx migrate run
+
     - name: Build
       run: cargo build --verbose
 #    - name: Run tests

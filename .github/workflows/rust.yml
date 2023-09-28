@@ -41,7 +41,7 @@ jobs:
       run: cargo install sqlx-cli --no-default-features --features postgres
     - name: Run migrations
       run: |
-        sqlx database create --database-url $DATABASE_URL
+        sqlx database create --database-url ${{ env.DATABASE_URL }}
         sqlx migrate run
 
     - name: Build

@@ -41,6 +41,6 @@ create table media (
 
 create table user_item_relation (
   user_id uuid references users(id) on delete cascade,
-  item_id uuid references media(id), on delete cascade,
+  item_id uuid references media(id) on delete cascade,
   primary key (user_id, item_id)
 );

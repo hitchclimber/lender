@@ -1,4 +1,3 @@
-use postgis::ewkb::Point;
 use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
 use uuid::Uuid;
@@ -12,7 +11,8 @@ pub struct User {
     pub password: String,
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    pub location: Point,
+    // pub location: Point,
+    pub location: String,
 }
 
 #[derive(Debug, FromRow, Serialize, Deserialize)]
@@ -29,4 +29,10 @@ pub struct UpdateUser {
     pub last_name: Option<String>,
     pub email: Option<String>,
     pub password: Option<String>,
+}
+
+#[derive(Debug, FromRow, Serialize, Deserialize)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
 }

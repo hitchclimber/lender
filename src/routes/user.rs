@@ -94,10 +94,10 @@ async fn update_user(
         password = COALESCE($4, password), \
         updated_at = $5 \
         WHERE id = $6 RETURNING *",
-        body.first_name.to_owned().unwrap_or("".to_string()),
-        body.last_name.to_owned().unwrap_or("".to_string()),
-        body.email.to_owned().unwrap_or("".to_string()),
-        body.password.to_owned().unwrap_or("".to_string()),
+        body.first_name,
+        body.last_name,
+        body.email,
+        body.password,
         now,
         id.into_inner()
     )
@@ -118,8 +118,6 @@ async fn update_user(
         }
     }
 }
-
-// TODO: When deleting a user, we also need to delete them in the media relations table
 
 #[delete("/users/user/{id}")]
 async fn delete_user(id: web::Path<Uuid>, data: web::Data<AppState>) -> impl Responder {

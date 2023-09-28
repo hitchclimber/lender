@@ -5,15 +5,8 @@ This is a simple REST API that allows users to lend and borrow media in their re
 ## TODO
 
 - [x] Add basic CRUD operations for users
-- [ ] Add basic CRUD operations for media
+- [x] Add basic CRUD operations for media
 - [ ] Add localisation
-     &rarr; tried extensively but the necessary crates don't yet offer enough support to make this convenient (I don't want to hack around packing everything into strings)
-- [ ] Add authentication
-- [ ] Data privacy?!
-  - reduce query results (no '\*' queries, at least don't send everything back)
-- [ ] Idea: create a helper that lets you easily digitalise your library (e.g. by scanning ISBN)
-- [ ] Add `Makefile`:w
-
-
+     &rarr; tried extensively to make it work, but had to use a simple `String` for cities as a workaround until I find a better solution or `sqlx` plays better with geometries out of the box
 
 
